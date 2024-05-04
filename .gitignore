@@ -1,0 +1,14 @@
+# Visual Studio
+.vs/
+bin/
+obj/
+*.suo
+*.user
+*.sln.docstates
+
+# Maven
+target/
+*.jar
+*.war
+*.ear
+*.class
