@@ -4,11 +4,12 @@ import estu.ceng.entities.concrete.Category;
 import estu.ceng.entities.concrete.Ingredient;
 import estu.ceng.entities.concrete.Tag;
 import estu.ceng.modules.creation.concrete.RecipeType;
-import estu.ceng.modules.ratings.abstracts.RecipeObserver;
+import estu.ceng.modules.ratings.abstracts.Subject;
+import estu.ceng.modules.ratings.abstracts.Observer;
 
 import java.util.*;
 
-public class Recipe {
+public class Recipe implements Subject{
     private int id;
 
     private String name;
@@ -25,7 +26,7 @@ public class Recipe {
 
     private ArrayList<String> instructions = new ArrayList<>();
 
-    private List<RecipeObserver> observers = new ArrayList<>();
+    private List<Observer> observers = new ArrayList<>();
     private int totalRatings;
     private double averageRating;
 
@@ -36,21 +37,20 @@ public class Recipe {
         categories.add(Category.NONE);
     }
 
-
-    public void registerObserver(RecipeObserver observer) {
+    public void registerObserver(Observer observer) {
         observers.add(observer);
     }
 
-    public void removeObserver(RecipeObserver observer) {
+    public void removeObserver(Observer observer) {
         observers.remove(observer);
     }
 
-    private void notifyObservers() {
-        for (RecipeObserver observer : observers) {
-            observer.update(this);
+    public void notifyObservers() {
+        for (Observer observer : observers) {
+            observer.update(totalRatings, averageRating);
         }
     }
-
+    
 
     public ArrayList<String> getInstructions() {
         return instructions;
@@ -124,7 +124,6 @@ public class Recipe {
     public void setName(String name) {
         this.name = name;
     }
-
 
     public String getSize() {
         return servingSize;
