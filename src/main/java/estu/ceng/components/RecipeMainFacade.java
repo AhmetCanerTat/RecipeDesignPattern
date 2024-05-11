@@ -1,12 +1,16 @@
 package estu.ceng.components;
 
+import estu.ceng.entities.abstracts.Recipe;
+import estu.ceng.entities.concrete.Size;
 import estu.ceng.modules.creation.abstracts.RecipeFactory;
 
 public class RecipeMainFacade {
     private RecipeFactoryCreator recipeFactoryCreator;
+    private SizeSelector sizeSelector;
 
     RecipeMainFacade() {
         recipeFactoryCreator = new RecipeFactoryCreator();
+        sizeSelector = new SizeSelector();
     }
 
     public static void showMenu() {
@@ -50,7 +54,15 @@ public class RecipeMainFacade {
         RecipeFactory recipeFactory;
         System.out.println("===== Create Recipe =====");
         recipeFactory = getRecipeFactory();
+        System.out.println("Please enter the name of the recipe");
+        String recipeName = System.console().readLine();
+        Size size = getSize();
+        Recipe recipe = recipeFactory.createRecipes(recipeName, size);
 
+    }
+
+    public Size getSize() {
+        return sizeSelector.selectSize();
     }
 
     public RecipeFactory getRecipeFactory() {

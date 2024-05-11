@@ -2,6 +2,7 @@ package estu.ceng.entities.abstracts;
 
 import estu.ceng.entities.concrete.Category;
 import estu.ceng.entities.concrete.Ingredient;
+import estu.ceng.entities.concrete.Size;
 import estu.ceng.entities.concrete.Tag;
 import estu.ceng.modules.creation.concrete.RecipeType;
 import estu.ceng.modules.ratings.abstracts.Subject;
@@ -14,7 +15,7 @@ public class Recipe implements Subject{
 
     private String name;
 
-    private String servingSize;
+    private Size servingSize;
 
     private RecipeType type;
 
@@ -30,7 +31,7 @@ public class Recipe implements Subject{
     private int totalRatings;
     private double averageRating;
 
-    public Recipe(String name, String size) {
+    public Recipe(String name, Size size) {
         this.id = new Random().nextInt();
         this.name = name;
         size = servingSize;
@@ -125,11 +126,11 @@ public class Recipe implements Subject{
         this.name = name;
     }
 
-    public String getSize() {
+    public Size getSize() {
         return servingSize;
     }
 
-    public void setSize(String size) {
+    public void setSize(Size size) {
         servingSize = size;
     }
 
