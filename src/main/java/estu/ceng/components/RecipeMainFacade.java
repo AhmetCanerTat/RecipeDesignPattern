@@ -75,6 +75,31 @@ public class RecipeMainFacade {
         System.out.println("Recipe created successfully");
     }
 
+    private static void SearchRecipe() {
+        System.out.println("===== Search Recipe =====");
+        System.out.println("Please enter the name of the recipe");
+        String recipeName = System.console().readLine();
+        // search recipe
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public static void recipeDetailAdder(Recipe recipe) {
         recipe.addCategory(getCategorySelector());
         recipe.addTag(getTagSelector());
