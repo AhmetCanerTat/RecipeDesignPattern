@@ -1,5 +1,6 @@
 package estu.ceng.modules.search;
 
+import estu.ceng.components.RecipeCardComponent;
 import estu.ceng.entities.abstracts.Recipe;
 import estu.ceng.entities.concrete.Category;
 import estu.ceng.entities.concrete.Ingredient;

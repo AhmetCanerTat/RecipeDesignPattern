@@ -10,7 +10,7 @@ import estu.ceng.modules.ratings.abstracts.Observer;
 
 import java.util.*;
 
-public class Recipe implements Subject{
+public class Recipe implements Subject {
     private int id;
 
     private String name;
@@ -51,7 +51,6 @@ public class Recipe implements Subject{
             observer.update(totalRatings, averageRating);
         }
     }
-    
 
     public ArrayList<String> getInstructions() {
         return instructions;
@@ -84,14 +83,14 @@ public class Recipe implements Subject{
         }
     }
 
-    public void setCategories(ArrayList<Category> categories) {
+    public void setCategories(HashSet<Category> categories) {
         this.categories.clear();
         for (Category category : categories) {
             this.categories.add(category);
         }
     }
 
-    public void setTags(ArrayList<Tag> tags) {
+    public void setTags(HashSet<Tag> tags) {
         this.tags.clear();
         for (Tag tag : tags) {
             this.tags.add(tag);
