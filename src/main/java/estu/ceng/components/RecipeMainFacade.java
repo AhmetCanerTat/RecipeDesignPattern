@@ -1,16 +1,29 @@
 package estu.ceng.components;
 
+import java.util.List;
+
 import estu.ceng.entities.abstracts.Recipe;
+import estu.ceng.entities.concrete.Category;
+import estu.ceng.entities.concrete.Ingredient;
 import estu.ceng.entities.concrete.Size;
+import estu.ceng.entities.concrete.Tag;
 import estu.ceng.modules.creation.abstracts.RecipeFactory;
 
 public class RecipeMainFacade {
-    private RecipeFactoryCreator recipeFactoryCreator;
-    private SizeSelector sizeSelector;
+    private static RecipeFactoryCreator recipeFactoryCreator;
+    private static SizeSelector sizeSelector;
+    private static CategorySelector categorySelector;
+    private static TagSelector tagSelector;
+    private static AddIngredient addIngredient;
+    private static AddInstructions addInstructions;
 
     RecipeMainFacade() {
         recipeFactoryCreator = new RecipeFactoryCreator();
         sizeSelector = new SizeSelector();
+        categorySelector = new CategorySelector();
+        tagSelector = new TagSelector();
+        addIngredient = new AddIngredient();
+        addInstructions = new AddInstructions();
     }
 
     public static void showMenu() {
@@ -50,22 +63,47 @@ public class RecipeMainFacade {
 
     }
 
-    private void CreateRecipe() {
+    private static void CreateRecipe() {
         RecipeFactory recipeFactory;
         System.out.println("===== Create Recipe =====");
-        recipeFactory = getRecipeFactory();
+        recipeFactory = getFactorySelector();
         System.out.println("Please enter the name of the recipe");
         String recipeName = System.console().readLine();
-        Size size = getSize();
+        Size size = getSizeSelector();
         Recipe recipe = recipeFactory.createRecipes(recipeName, size);
-
+        recipeDetailAdder(recipe);
+        System.out.println("Recipe created successfully");
     }
 
-    public Size getSize() {
+    public static void recipeDetailAdder(Recipe recipe) {
+        recipe.addCategory(getCategorySelector());
+        recipe.addTag(getTagSelector());
+        recipe.setIngredients(getIngredientList());
+        recipe.setInstructions(null);
+    }
+
+    public static Size getSizeSelector() {
         return sizeSelector.selectSize();
     }
 
-    public RecipeFactory getRecipeFactory() {
+    public static RecipeFactory getFactorySelector() {
         return recipeFactoryCreator.getRecipeStyle();
     }
+
+    public static Category getCategorySelector() {
+        return categorySelector.selectCategory();
+    }
+
+    public static Tag getTagSelector() {
+        return tagSelector.selectTag();
+    }
+
+    public static List<Ingredient> getIngredientList() {
+        return addIngredient.createIngredientList();
+    }
+
+    public static List<String> getInstructions() {
+        return addInstructions.createInstructions();
+    }
+
 }

@@ -8,7 +8,7 @@ public class SizeSelector {
         int i = 1;
         System.out.println("Please select the size of the recipe");
         for (Size size : Size.values()) {
-            System.out.println(i + "." + size);
+            System.out.println(i + "." + size.toString());
             i++;
         }
         System.out.println("Enter your choice: ");
