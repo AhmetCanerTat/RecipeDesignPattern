@@ -30,6 +30,9 @@ public class Recipe implements Subject {
     private List<Observer> observers = new ArrayList<>();
     private int totalRatings;
     private double averageRating;
+    private int rating;
+
+    private ArrayList<Integer> ratings = new ArrayList<>();
 
     public Recipe(String name, Size size) {
         this.id = new Random().nextInt();
@@ -48,8 +51,18 @@ public class Recipe implements Subject {
 
     public void notifyObservers() {
         for (Observer observer : observers) {
-            observer.update(totalRatings, averageRating);
+            observer.update(rating);
         }
+    }
+
+    public void ratingChanged() {
+        notifyObservers();
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+        ratings.add(rating);
+        ratingChanged();
     }
 
     public ArrayList<String> getInstructions() {
