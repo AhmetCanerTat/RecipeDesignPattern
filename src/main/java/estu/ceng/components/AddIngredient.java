@@ -6,7 +6,7 @@ import java.util.List;
 import estu.ceng.entities.concrete.Ingredient;
 import estu.ceng.entities.concrete.Unit;
 
-public  class AddIngredient {
+public class AddIngredient {
 
     static List<Ingredient> createIngredientList() {
         System.out.println("Adding ingredients to the recipe");

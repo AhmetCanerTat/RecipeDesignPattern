@@ -13,11 +13,14 @@ import java.util.List;
 
 public class ModifyRecipeComponent {
 
-    private Recipe recipe = selectRecipeToModify();
-    ModifyRecipe modifyRecipe = new ModifyRecipe(recipe);
+    private Recipe recipe;
+    ModifyRecipe modifyRecipe;
+    AddInstructions addInstructions;
     SizeSelector sizeSelector = new SizeSelector();
 
     void handleModifyRecipe() {
+        recipe = selectRecipeToModify();
+        modifyRecipe = new ModifyRecipe(recipe);
         System.out.println("**************** Modify Recipe ****************");
         System.out.println("|   1. Modify Recipe Name                      |");
         System.out.println("|   2. Modify Recipe Service Size              |");
@@ -44,7 +47,7 @@ public class ModifyRecipeComponent {
                 System.out.println("Modify Recipe Name selected");
                 modifyRecipeName();
                 break;
-            
+
             case 2:
                 // handle option 3
                 System.out.println("Modify Recipe Service Size selected");
@@ -116,7 +119,7 @@ public class ModifyRecipeComponent {
     }
 
     private void modifyRecipeInstructions() {
-        ArrayList<String> instructions = AddInstructions.createInstructions();
+        ArrayList<String> instructions = addInstructions.createInstructions();
 
         ArrayList<String> oldInstructions = recipe.getInstructions();
 
@@ -145,7 +148,7 @@ public class ModifyRecipeComponent {
 
         Size newServiceSize = null;
         try {
-            
+
             newServiceSize = sizeSelector.selectSize();
         } catch (Exception e) {
             System.out.println("Invalid choice, please try again.");
@@ -157,7 +160,6 @@ public class ModifyRecipeComponent {
         undoModification(oldServiceSize, "size");
     }
 
-   
     private void modifyRecipeName() {
         System.out.println("Enter new name: ");
 
@@ -182,7 +184,7 @@ public class ModifyRecipeComponent {
                 case "name":
                     modifyRecipe.modifyRecipeName((String) a);
                     break;
-                
+
                 case "size":
                     modifyRecipe.modifyRecipeSize((Size) a);
                     break;

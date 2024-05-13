@@ -3,7 +3,7 @@ package estu.ceng.components;
 import java.util.ArrayList;
 
 public class AddInstructions {
-    static ArrayList<String> createInstructions() {
+    ArrayList<String> createInstructions() {
         System.out.println("Add instruction and click enter (write done when you are done) ");
 
         ArrayList<String> instructions = new ArrayList<>();

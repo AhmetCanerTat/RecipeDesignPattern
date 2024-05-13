@@ -13,6 +13,14 @@ public class SizeSelector {
         }
         System.out.println("Enter your choice: ");
         int choice = 0;
+        while (true) {
+            try {
+                choice = Integer.parseInt(System.console().readLine());
+                break;
+            } catch (Exception e) {
+                System.out.println("Invalid choice, please try again.");
+            }
+        }
         switch (choice) {
             case 1:
                 System.out.println("Small size selected");

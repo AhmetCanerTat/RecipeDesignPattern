@@ -27,11 +27,10 @@ public class Recipe implements Subject {
 
     private ArrayList<String> instructions = new ArrayList<>();
 
-    private List<Observer> observers = new ArrayList<>();
+    public List<Observer> observers = new ArrayList<>();
     private int totalRatings;
     private double averageRating;
     private int rating;
-
     private ArrayList<Integer> ratings = new ArrayList<>();
 
     public Recipe(String name, Size size) {
@@ -64,6 +63,8 @@ public class Recipe implements Subject {
         ratings.add(rating);
         ratingChanged();
     }
+
+   
 
     public ArrayList<String> getInstructions() {
         return instructions;

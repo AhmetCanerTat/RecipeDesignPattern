@@ -2,15 +2,21 @@ package estu.ceng.components;
 
 public class RecipeMainFacade {
 
-    private static CreateRecipe createRecipe;
-    private static RecipeSearcher recipeSearcher;
-    private static ModifyRecipeComponent modifyRecipe;
+    private CreateRecipe createRecipe;
+    private RecipeSearcher recipeSearcher;
+    private ModifyRecipeComponent modifyRecipe;
+    private RateRecipe rateRecipe;
 
-    RecipeMainFacade() {
-
+    public RecipeMainFacade(CreateRecipe createRecipe, RecipeSearcher recipeSearcher,
+            ModifyRecipeComponent modifyRecipe,
+            RateRecipe rateRecipe) {
+        this.createRecipe = createRecipe;
+        this.recipeSearcher = recipeSearcher;
+        this.modifyRecipe = modifyRecipe;
+        this.rateRecipe = rateRecipe;
     }
 
-    public  void showMenu() {
+    public void showMenu() {
         boolean exit = false;
         while (!exit) {
 
@@ -42,6 +48,21 @@ public class RecipeMainFacade {
 
                 case 3:
                     modifyRecipe.handleModifyRecipe();
+                    break;
+                case 4:
+                    rateRecipe.rateRecipe();
+                    break;
+                case 5:
+                    RecipeLister.listAllRecipes();
+                    break;
+                case 6:
+                    RecipeLister.listAllRecipesForAverageRatings();
+                    RecipeLister.listAllRecipesForTotalRatings();
+                    break;
+                case 7:
+
+                    System.out.println("Quitting the program...");
+                    exit = true;
                     break;
                 default:
                     System.out.println("Invalid choice, please try again.");

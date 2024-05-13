@@ -1,12 +1,13 @@
 package estu.ceng.components;
 
 import estu.ceng.entities.abstracts.Recipe;
-
+import estu.ceng.modules.ratings.abstracts.Observer;
 import estu.ceng.modules.singleton.RecipeBookSingleton;
 
 import java.util.List;
 
 public class RecipeLister {
+
     static RecipeBookSingleton recipeBookSingleton = RecipeBookSingleton.getInstance();
 
     public static void listAllRecipes() {
@@ -23,6 +24,7 @@ public class RecipeLister {
         Recipe recipe;
         for (int i = 0; i < recipeList.size(); i++) {
             recipe = recipeList.get(i);
+
             RecipeCardComponent.printRecipeForAverageRating(recipe);
         }
     }
@@ -32,7 +34,6 @@ public class RecipeLister {
         Recipe recipe;
         for (int i = 0; i < recipeList.size(); i++) {
             recipe = recipeList.get(i);
-            recipe.setRatingComputationStrategy(new TotalRatingsStrategy());
             RecipeCardComponent.printRecipeForAverageRating(recipe);
         }
     }

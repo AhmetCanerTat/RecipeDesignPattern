@@ -9,7 +9,7 @@ public class RecipeSearcher {
     private  CategorySelector categorySelector;
     private  TagSelector tagSelector;
 
-    RecipeSearcher() {
+    public RecipeSearcher() {
         searchRecipe = new SearchRecipe();
         categorySelector = new CategorySelector();
         tagSelector = new TagSelector();
