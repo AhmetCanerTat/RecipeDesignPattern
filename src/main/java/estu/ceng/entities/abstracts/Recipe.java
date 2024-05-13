@@ -2,6 +2,7 @@ package estu.ceng.entities.abstracts;
 
 import estu.ceng.entities.concrete.Category;
 import estu.ceng.entities.concrete.Ingredient;
+import estu.ceng.entities.concrete.Size;
 import estu.ceng.entities.concrete.Tag;
 import estu.ceng.modules.creation.concrete.RecipeType;
 import estu.ceng.modules.ratings.abstracts.Subject;
@@ -9,12 +10,12 @@ import estu.ceng.modules.ratings.abstracts.Observer;
 
 import java.util.*;
 
-public class Recipe implements Subject{
+public class Recipe implements Subject {
     private int id;
 
     private String name;
 
-    private String servingSize;
+    private Size servingSize;
 
     private RecipeType type;
 
@@ -26,11 +27,13 @@ public class Recipe implements Subject{
 
     private ArrayList<String> instructions = new ArrayList<>();
 
-    private List<Observer> observers = new ArrayList<>();
+    public List<Observer> observers = new ArrayList<>();
     private int totalRatings;
     private double averageRating;
+    private int rating;
+    private ArrayList<Integer> ratings = new ArrayList<>();
 
-    public Recipe(String name, String size) {
+    public Recipe(String name, Size size) {
         this.id = new Random().nextInt();
         this.name = name;
         size = servingSize;
@@ -47,10 +50,21 @@ public class Recipe implements Subject{
 
     public void notifyObservers() {
         for (Observer observer : observers) {
-            observer.update(totalRatings, averageRating);
+            observer.update(rating);
         }
     }
-    
+
+    public void ratingChanged() {
+        notifyObservers();
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+        ratings.add(rating);
+        ratingChanged();
+    }
+
+   
 
     public ArrayList<String> getInstructions() {
         return instructions;
@@ -83,14 +97,14 @@ public class Recipe implements Subject{
         }
     }
 
-    public void setCategories(ArrayList<Category> categories) {
+    public void setCategories(HashSet<Category> categories) {
         this.categories.clear();
         for (Category category : categories) {
             this.categories.add(category);
         }
     }
 
-    public void setTags(ArrayList<Tag> tags) {
+    public void setTags(HashSet<Tag> tags) {
         this.tags.clear();
         for (Tag tag : tags) {
             this.tags.add(tag);
@@ -125,11 +139,11 @@ public class Recipe implements Subject{
         this.name = name;
     }
 
-    public String getSize() {
+    public Size getSize() {
         return servingSize;
     }
 
-    public void setSize(String size) {
+    public void setSize(Size size) {
         servingSize = size;
     }
 
